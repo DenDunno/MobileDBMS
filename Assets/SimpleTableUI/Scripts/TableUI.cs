@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 
 namespace UnityEngine.UI.TableUI
@@ -28,11 +29,11 @@ namespace UnityEngine.UI.TableUI
         [SerializeField, HideInInspector]
         public SelectionGrid selectionGrid;
 
+        [SerializeField] private TableValidation _tableValidation;
+
         //Maximum values can be changed, but the minimun must be >= 1 
         public static int MAX_ROWS = 20, MIN_ROWS = 1, MAX_COL = 20, MIN_COL = 1;
-
-
-
+        
         [SerializeField,HideInInspector]
         private List<float> _columnsWidth;
         public List<float> ColumnsWidth
@@ -66,15 +67,21 @@ namespace UnityEngine.UI.TableUI
         }
 
         [SerializeField,HideInInspector]
-        internal List<TextMeshList> data;
+        public List<TextMeshList> data;
         
         public TextMeshProUGUI GetCell(int row, int column)
         {
             return data[row].list[column];
         }
+        
+        public TMP_InputField GetInputField(int row, int column)
+        {
+            return data[row].list[column].transform.parent.GetComponent<TMP_InputField>();;
+        }
 
         [SerializeField, HideInInspector]
         private int _columns;
+
         public int Columns
         {
             get => _columns;
@@ -419,16 +426,23 @@ namespace UnityEngine.UI.TableUI
 
             GameObject text = new GameObject("inputField");
             text.transform.SetParent(cells.transform);
-            
+            text.transform.localScale = Vector3.one;
+
             var inputField = text.AddComponent<TMP_InputField>();
             inputField.lineType = TMP_InputField.LineType.MultiLineNewline;
             inputField.lineLimit = 2;
+            var cell = text.AddComponent<Cell>();
+
+            cell.Init(columnN, this, _tableValidation);
+            inputField.onEndEdit.AddListener(cell.OnEndEdit);
             
             Image image = text.AddComponent<Image>();
             image.color = new Color(0, 0, 0, 0);
 
             var tmp = new GameObject("text").AddComponent<TextMeshProUGUI>();
             tmp.transform.SetParent(inputField.transform);
+            tmp.transform.localScale = Vector3.one;
+            
             RectTransform tmpRect = (tmp.transform as RectTransform);
             tmpRect.anchorMin = Vector2.zero;
             tmpRect.anchorMax = Vector2.one;
@@ -437,6 +451,7 @@ namespace UnityEngine.UI.TableUI
             
             inputField.textComponent = tmp;
             inputField.textViewport = tmp.transform as RectTransform;
+            
             
             text.GetComponent<RectTransform>().sizeDelta = new Vector2(ColumnsWidth[columnN], RowsHeight[rowN]);
 
