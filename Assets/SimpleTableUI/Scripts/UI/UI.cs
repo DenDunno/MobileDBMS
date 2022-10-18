@@ -1,30 +1,46 @@
+using System;
 using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] private TablePreview _tablePreview;
     [SerializeField] private TablePanel _tablePanel;
     [SerializeField] private ColumnAddingPanel _columnAddingPanel;
-    private Panel[] _uiElements;
+    [SerializeField] private StartPanel _startPanel;
+    [SerializeField] private DatabasePreviewPanel _databasePreviewPanel;
+    [SerializeField] private DatabaseCreationPanel _databaseCreationPanel;
+    [SerializeField] private DatabaseOpeningPanel _databaseOpeningPanel;
+    [SerializeField] private TableCreationPanel _tableCreationPanel;
+    private Panel[] _panels;
 
     private void Start()
     {
-        _uiElements = new Panel[] {_tablePanel, _columnAddingPanel, _tablePreview};
+        _panels = new Panel[]
+        {
+            _tablePanel, _columnAddingPanel, _databasePreviewPanel, _startPanel,
+            _databaseCreationPanel, _databaseOpeningPanel, _tableCreationPanel
+        };
     }
 
-    public void ShowTable() => ShowPanel(_tablePanel);
-
-    public void ShowColumnAddingPanel() => ShowPanel(_columnAddingPanel);
-    
-    public void ShowTablePreview() => ShowPanel(_tablePreview);
-
-    private void ShowPanel(Panel panel)
+    public void ShowPanel<T>() where T : Panel
     {
-        foreach (Panel uiElement in _uiElements)
-        {
-            uiElement.gameObject.SetActive(false);
-        }
+        bool failToOpen = true;
         
-        panel.gameObject.SetActive(true);
+        foreach (Panel panel in _panels)
+        {
+            if (panel is T)
+            {
+                panel.Show();
+                failToOpen = false;
+            }
+            else
+            {
+                panel.Hide();
+            }
+        }
+
+        if (failToOpen)
+        {
+            throw new Exception($"Cannot open panel with type {typeof(T)}");
+        }
     }
 }
