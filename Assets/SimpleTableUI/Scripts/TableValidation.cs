@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class TableValidation : MonoBehaviour
 {
-    public void Validate(string type, string input)
+    private readonly CellValidation _cellValidation = new CellValidation();
+    
+    public void Validate(TMP_InputField inputField, string type)
     {
-        Debug.Log(type + " " + input);
+        _cellValidation.TrySaveValue(inputField, type);
     }
 }

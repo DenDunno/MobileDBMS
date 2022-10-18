@@ -433,7 +433,7 @@ namespace UnityEngine.UI.TableUI
             inputField.lineLimit = 2;
             var cell = text.AddComponent<Cell>();
 
-            cell.Init(columnN, this, _tableValidation);
+            cell.Init(columnN, rowN, this, _tableValidation);
             inputField.onEndEdit.AddListener(cell.OnEndEdit);
             
             Image image = text.AddComponent<Image>();

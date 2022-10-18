@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.TableUI;
@@ -11,9 +10,6 @@ public class TableResizement : MonoBehaviour
     public void AddRow()
     {
         _tableUI.Rows++;
-
-        TMP_InputField a = _tableUI.GetInputField(_tableUI.Rows - 1, _tableUI.Columns - 1);
-        a.text = "Aboba";
         RebuildLayout();
     }
     
@@ -22,13 +18,7 @@ public class TableResizement : MonoBehaviour
         _tableUI.Rows--;
         RebuildLayout();
     }
-    
-    public void AddColumn()
-    {
-        _tableUI.Columns++;
-        RebuildLayout();
-    }
-    
+
     public void RemoveColumn()
     {
         _tableUI.Columns--;

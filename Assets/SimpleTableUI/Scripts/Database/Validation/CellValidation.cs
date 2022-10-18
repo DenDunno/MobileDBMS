@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 
 public class CellValidation
 {
@@ -13,19 +14,20 @@ public class CellValidation
         {DatabaseTypesName.DATE, new DateValidation()},
     };
 
-    public void TrySaveValue(object value, string column)
+    public void TrySaveValue(TMP_InputField inputField, string column)
     {
         IValidation validation = _validations[column];
 
-        if (value.ToString() == string.Empty)
+        if (inputField.text == string.Empty)
             return;
         
         try
         {
-            validation.Apply(value);
+            validation.Apply(inputField.text);
         }
         catch (Exception exception)
         {
+            inputField.text = string.Empty;
             ErrorPanel.Instance.ShowError(exception.Message);
         }
     }
