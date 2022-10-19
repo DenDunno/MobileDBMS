@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DatabaseManagementSystem  : MonoBehaviour
 {
-    private readonly SaveData _saveData = new SaveData();
+    private SaveData _saveData = new SaveData();
     
     public Database Database { get; private set; } 
     
@@ -47,13 +47,38 @@ public class DatabaseManagementSystem  : MonoBehaviour
     public void Save()
     {
         _saveData.Databases[Database.Name] = Database;
-        string json = JsonConvert.SerializeObject(_saveData);
-
-        PlayerPrefs.SetString("Save", json);
+        SaveData();
     }
 
     public void OpenDatabase(string databaseName)
     {
+        _saveData = JsonConvert.DeserializeObject<SaveData>(PlayerPrefs.GetString("Save"));
         Database = _saveData.Databases[databaseName];
+    }
+
+    public void RemoveDatabase(string databaseName)
+    {
+        if (_saveData.Databases.ContainsKey(databaseName))
+        {
+            _saveData.Databases.Remove(databaseName);
+            SaveData();
+        }
+    }
+
+    public void RemoveTable(string tableName)
+    {
+        if (Database.Tables.ContainsKey(tableName))
+        {
+            Database.Tables.Remove(tableName);
+            _saveData.Databases[Database.Name] = Database;
+            SaveData();
+        }
+    }
+
+    private void SaveData()
+    {
+        string json = JsonConvert.SerializeObject(_saveData);
+
+        PlayerPrefs.SetString("Save", json);
     }
 }

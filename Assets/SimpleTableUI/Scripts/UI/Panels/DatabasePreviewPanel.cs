@@ -38,7 +38,7 @@ public class DatabasePreviewPanel : Panel
         foreach (Table table in database.Tables.Values)
         {
             TableView tableView = Instantiate(_tableViewPrefab, _grid.transform);
-            tableView.Init(_tableSetting, table, _ui);
+            tableView.Init(_tableSetting, table, _ui, _databaseManagementSystem);
         }
     }
 }
