@@ -76,7 +76,8 @@ namespace UnityEngine.UI.TableUI
         
         public TMP_InputField GetInputField(int row, int column)
         {
-            return data[row].list[column].transform.parent.GetComponent<TMP_InputField>();;
+            Transform inputField = data[row].list[column].transform.parent;
+            return inputField.GetComponent<TMP_InputField>();;
         }
 
         [SerializeField, HideInInspector]

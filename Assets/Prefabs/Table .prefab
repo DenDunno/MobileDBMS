@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 51498469048344897}
   - component: {fileID: 51498469048344896}
   - component: {fileID: -4934188120104960718}
+  - component: {fileID: -350069143569503751}
   - component: {fileID: 5490263289503074797}
   m_Layer: 0
   m_Name: 'Table '
@@ -163,6 +164,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 451f76e14db9d76488d2d627c1ded312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: {fileID: 51498469650352155}
+  _button: {fileID: 5490263289503074797}
+--- !u!114 &-350069143569503751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51498469048344902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1433cf89f99cfc1409cb24598f06b15a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _name: {fileID: 51498469650352155}

@@ -13,7 +13,7 @@ public class ColumnAddingPanel : Panel
     {
         if (_inputField.text == string.Empty)
         {
-            ErrorPanel.Instance.ShowError("Table name cannot be empty");
+            ErrorPanel.Instance.ShowError("Column name cannot be empty");
         }
         else
         {

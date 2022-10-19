@@ -17,7 +17,7 @@ public class UI : MonoBehaviour
         _panels = new Panel[]
         {
             _tablePanel, _columnAddingPanel, _databasePreviewPanel, _startPanel,
-            _databaseCreationPanel, _databaseOpeningPanel, _tableCreationPanel
+            _databaseCreationPanel, _databaseOpeningPanel, _tableCreationPanel,
         };
     }
 

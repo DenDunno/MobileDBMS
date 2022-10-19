@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class PanelTransitionButton : MonoBehaviour
+public abstract class PanelTransitionButton<T> : MonoBehaviour where T : Panel
 {
     [SerializeField] private UI _ui;
     private Button _button;
@@ -24,6 +24,9 @@ public class PanelTransitionButton : MonoBehaviour
 
     private void ShowPanel()
     {
-        _ui.ShowPanel<ColumnAddingPanel>();
+        OnShow();
+        _ui.ShowPanel<T>();
     }
+
+    protected virtual void OnShow() { }
 }

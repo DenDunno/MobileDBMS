@@ -13,9 +13,8 @@ public class DatabaseCreationPanel : Panel
         {
             ErrorPanel.Instance.ShowError("Database name cannot be empty");
         }
-        else
+        else if (_databaseManagementSystem.TryCreateDatabase(_inputField.text))
         {
-            _databaseManagementSystem.CreateDatabase(_inputField.text);
             _ui.ShowPanel<DatabasePreviewPanel>();
             _inputField.text = string.Empty;
         }

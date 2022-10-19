@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Newtonsoft.Json;
+using UnityEngine;
 
 public class DatabaseManagementSystem  : MonoBehaviour
 {
@@ -6,12 +7,12 @@ public class DatabaseManagementSystem  : MonoBehaviour
     
     public Database Database { get; private set; } 
     
-    public void CreateDatabase(string databaseName)
+    public bool TryCreateDatabase(string databaseName)
     {
         if (_saveData.Databases.ContainsKey(databaseName))
         {
             ErrorPanel.Instance.ShowError("Database with such name already exists");
-            return;
+            return false;
         }
 
         Database = new Database()
@@ -20,6 +21,8 @@ public class DatabaseManagementSystem  : MonoBehaviour
         };
 
         _saveData.Databases.Add(databaseName, Database);
+        
+        return true;
     }
 
     public bool TryAddTable(string tableName)
@@ -39,5 +42,18 @@ public class DatabaseManagementSystem  : MonoBehaviour
         }
 
         return success;
+    }
+
+    public void Save()
+    {
+        _saveData.Databases[Database.Name] = Database;
+        string json = JsonConvert.SerializeObject(_saveData);
+
+        PlayerPrefs.SetString("Save", json);
+    }
+
+    public void OpenDatabase(string databaseName)
+    {
+        Database = _saveData.Databases[databaseName];
     }
 }
