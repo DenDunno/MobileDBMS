@@ -15,6 +15,8 @@ public class DatabaseOpenButton : MonoBehaviour
         _databaseManagementSystem = databaseManagementSystem;
         _name.text = databaseName;
         _ui = ui;
+        
+        _deleteButton.gameObject.SetActive(User.IsAdmin);
     }
     
     private void OnEnable()

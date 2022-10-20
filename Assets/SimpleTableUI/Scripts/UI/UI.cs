@@ -10,6 +10,7 @@ public class UI : MonoBehaviour
     [SerializeField] private DatabaseCreationPanel _databaseCreationPanel;
     [SerializeField] private DatabaseOpeningPanel _databaseOpeningPanel;
     [SerializeField] private TableCreationPanel _tableCreationPanel;
+    [SerializeField] private AuthorizationPanel _authorizationPanel;
     private Panel[] _panels;
 
     private void Start()
@@ -18,6 +19,7 @@ public class UI : MonoBehaviour
         {
             _tablePanel, _columnAddingPanel, _databasePreviewPanel, _startPanel,
             _databaseCreationPanel, _databaseOpeningPanel, _tableCreationPanel,
+            _authorizationPanel
         };
     }
 

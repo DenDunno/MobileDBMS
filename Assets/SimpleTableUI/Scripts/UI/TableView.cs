@@ -19,6 +19,8 @@ public class TableView : MonoBehaviour
         _ui = ui;
         _name.text = table.Name;
         _databaseManagementSystem = databaseManagementSystem;
+        
+        _deleteButton.gameObject.SetActive(User.IsAdmin);
     }
 
     private void OnEnable()

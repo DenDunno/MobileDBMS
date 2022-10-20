@@ -15,6 +15,9 @@ public class DatabaseOpeningPanel : Panel
         var saveData = JsonConvert.DeserializeObject<SaveData>(json);
         _gridLayoutGroup.transform.DestroyChildren();
         
+        if (saveData == null)
+            return;
+        
         foreach (Database database in saveData.Databases.Values)
         {
             DatabaseOpenButton databaseOpenButton = Instantiate(_databaseOpenButton, _gridLayoutGroup.transform);
