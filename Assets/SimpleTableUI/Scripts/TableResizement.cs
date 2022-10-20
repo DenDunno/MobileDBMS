@@ -10,6 +10,7 @@ public class TableResizement : MonoBehaviour
     public void AddRow()
     {
         _tableUI.Rows++;
+        _tableUI.ScaleRow(_tableUI.Rows - 1);
         RebuildLayout();
     }
     

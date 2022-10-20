@@ -452,6 +452,11 @@ namespace UnityEngine.UI.TableUI
             
             inputField.textComponent = tmp;
             inputField.textViewport = tmp.transform as RectTransform;
+
+            if (rowN == 0)
+            {
+                inputField.interactable = false;
+            }
             
             
             text.GetComponent<RectTransform>().sizeDelta = new Vector2(ColumnsWidth[columnN], RowsHeight[rowN]);
@@ -933,9 +938,10 @@ namespace UnityEngine.UI.TableUI
         [System.Serializable]
         public class TextMeshList : ListWrapper<TextMeshProUGUI> { }
 
-
-
-
+        public void ScaleRow(int i)
+        {
+            transform.GetChild(0).GetChild(i).transform.localScale = Vector3.one;
+        }
     }
 
     [System.Serializable]

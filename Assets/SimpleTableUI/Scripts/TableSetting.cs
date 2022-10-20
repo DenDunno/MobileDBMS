@@ -37,6 +37,7 @@ public class TableSetting : MonoBehaviour
         ResizeTable(table);
         FillTableWithValues(table);
         FillFields(table);
+        ScaleTable();
     }
 
     private void ResizeTable(Table table)
@@ -62,6 +63,14 @@ public class TableSetting : MonoBehaviour
         for (int i = 1; i < _tableUI.Columns; ++i)
         {
             _tableUI.GetInputField(0, i).text = table.Fields[i - 1];
+        }
+    }
+
+    private void ScaleTable()
+    {
+        for (int i = 0; i < _tableUI.Rows; ++i)
+        {
+            _tableUI.ScaleRow(i);
         }
     }
 }
